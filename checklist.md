@@ -12,7 +12,7 @@
 - [x] ingenieros/representantes -> proyectos (N:M)
 - [x] Revisar consistencia base con el enunciado
 
-- [ ] **2) Incluir comportamiento OO mínimo**
+- [x] **2) Incluir comportamiento OO mínimo**
 - [x] Método común polimórfico en `Employee` y subclases (`can_join_projects`)
 - [x] Encapsulamiento consistente (atributos no públicos + acceso controlado)
 - [x] Docstrings en clases y métodos públicos
@@ -75,5 +75,4 @@
 - [x] Inicio de `modelos/`
 - [x] Encapsulamiento base
 - [x] Herencia inicial y jerarquía de roles
-- [x] Renombrado consistente a inglés en clases, atributos, métodos y archivos
 - [ ] Servicios, menús y utilidades: pendiente
