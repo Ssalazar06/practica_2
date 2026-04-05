@@ -43,6 +43,6 @@ class Project:
     def add_participant(self, employee_ssn: str) -> tuple[bool, str]:
         """Add participant SSN if not duplicated."""
         if employee_ssn in self.__participant_ssns:
-            return False, "Employee already assigned to this project."
+            return False, "Empleado ya asignado a este proyecto."
         self.__participant_ssns.append(employee_ssn)
-        return True, "Participant assigned."
+        return True, "Participante asignado."
