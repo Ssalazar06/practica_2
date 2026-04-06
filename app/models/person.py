@@ -1,9 +1,9 @@
 from datetime import date
 
-from Child import Child
-from Department import Department
-from Project import Project
-from Specialization import Specialization
+from models.child import Child
+from models.department import Department
+from models.project import Project
+from models.specialization import Specialization
 
 
 class Person:
@@ -113,9 +113,9 @@ class Employee(Person):
         """Add one child to the employee."""
         child_names = [item.get_name() for item in self.__children]
         if child.get_name() in child_names:
-            return False, "Child already registered for this employee."
+            return False, "Este hijo ya está registrado para el empleado."
         self.__children.append(child)
-        return True, "Child added."
+        return True, "Hijo registrado."
 
     def can_join_projects(self) -> bool:
         """Define if role can join projects."""
@@ -158,9 +158,9 @@ class SalesRepresentative(Employee):
     def add_region(self, region: str) -> tuple[bool, str]:
         """Add region if not repeated."""
         if region in self.__regions:
-            return False, "Region already assigned."
+            return False, "Esa región ya está asignada."
         self.__regions.append(region)
-        return True, "Region assigned."
+        return True, "Región asignada."
 
     def can_join_projects(self) -> bool:
         """Sales representative can join projects."""
@@ -202,17 +202,17 @@ class Engineer(Employee):
         """Add specialty if not repeated."""
         specialty_names = [item.get_name() for item in self.__specialties]
         if specialty.get_name() in specialty_names:
-            return False, "Specialty already assigned."
+            return False, "Esa especialidad ya está asignada."
         self.__specialties.append(specialty)
-        return True, "Specialty assigned."
+        return True, "Especialidad asignada."
 
     def assign_project(self, project: Project) -> tuple[bool, str]:
         """Assign project if not repeated."""
         project_names = [item.get_name() for item in self.__projects]
         if project.get_name() in project_names:
-            return False, "Project already assigned."
+            return False, "Ese proyecto ya está asignado."
         self.__projects.append(project)
-        return True, "Project assigned."
+        return True, "Proyecto asignado."
 
     def can_join_projects(self) -> bool:
         """Engineer can join projects."""
@@ -247,6 +247,6 @@ class SalesEngineer(Engineer):
     def add_region(self, region: str) -> tuple[bool, str]:
         """Add one region if not repeated."""
         if region in self.__regions:
-            return False, "Region already assigned."
+            return False, "Esa región ya está asignada."
         self.__regions.append(region)
-        return True, "Region assigned."
+        return True, "Región asignada."
