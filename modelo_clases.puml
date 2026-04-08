@@ -1,0 +1,130 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Person {
+  -person_id: str
+  -first_name: str
+  -middle_name: str
+  -last_name: str
+  -second_last_name: str
+  -birth_date: date
+  +get_person_id(): str
+  +get_first_name(): str
+  +get_middle_name(): str
+  +get_last_name(): str
+  +get_second_last_name(): str
+  +get_birth_date(): date
+  +get_full_name(): str
+}
+
+class Employee {
+  -ssn: str
+  -salary: float
+  -department: Department
+  -children: list[Child]
+  +get_ssn(): str
+  +get_salary(): float
+  +get_department(): Department
+  +get_children(): list[Child]
+  +set_salary(salary: float): None
+  +add_child(child: Child): tuple[bool, str]
+  +can_join_projects(): bool
+}
+
+class Manager {
+  +can_join_projects(): bool
+}
+
+class SalesRepresentative {
+  -regions: list[str]
+  +get_regions(): list[str]
+  +add_region(region: str): tuple[bool, str]
+  +can_join_projects(): bool
+}
+
+class Engineer {
+  -specialties: list[Specialization]
+  -projects: list[Project]
+  +get_specialties(): list[Specialization]
+  +get_projects(): list[Project]
+  +add_specialty(specialty: Specialization): tuple[bool, str]
+  +assign_project(project: Project): tuple[bool, str]
+  +can_join_projects(): bool
+}
+
+class SalesEngineer {
+  -regions: list[str]
+  +get_regions(): list[str]
+  +add_region(region: str): tuple[bool, str]
+}
+
+class Department {
+  -name: str
+  -locations: list[DepartmentLocation]
+  -manager_ssn: str
+  -employee_ssns: list[str]
+  -project_names: list[str]
+  +get_name(): str
+  +get_locations(): list[DepartmentLocation]
+  +get_manager_ssn(): str
+  +get_employee_ssns(): list[str]
+  +get_project_names(): list[str]
+  +set_name(name: str): None
+  +add_location(location: DepartmentLocation): tuple[bool, str]
+  +assign_manager(manager_ssn: str): tuple[bool, str]
+  +unassign_manager(manager_ssn: str): tuple[bool, str]
+  +add_employee_ssn(employee_ssn: str): tuple[bool, str]
+  +remove_employee_ssn(employee_ssn: str): tuple[bool, str]
+  +add_project_name(project_name: str): tuple[bool, str]
+  +remove_project_name(project_name: str): tuple[bool, str]
+}
+
+class DepartmentLocation {
+  -address: str
+  +get_address(): str
+  +set_address(address: str): None
+}
+
+class Child {
+  -name: str
+  -birth_date: date
+  -employee_ssn: str
+  +get_name(): str
+  +get_birth_date(): date
+  +get_employee_ssn(): str
+}
+
+class Project {
+  -name: str
+  -start_date: date
+  -controlling_department_name: str
+  -participant_ssns: list[str]
+  +get_name(): str
+  +get_start_date(): date
+  +get_controlling_department_name(): str
+  +get_participant_ssns(): list[str]
+  +set_name(name: str): None
+  +set_start_date(start_date: date): None
+  +add_participant(employee_ssn: str): tuple[bool, str]
+}
+
+class Specialization {
+  -name: str
+  +get_name(): str
+  +set_name(name: str): None
+}
+
+Person <|-- Employee
+Employee <|-- Manager
+Employee <|-- SalesRepresentative
+Employee <|-- Engineer
+Engineer <|-- SalesEngineer
+
+Department "1" -- "0..*" Employee : employees
+Department "1" -- "0..*" Project : controls
+Department "1" *-- "0..*" DepartmentLocation : locations
+Department "1" -- "0..1" Manager : managed by
+Employee "1" *-- "0..*" Child : children
+Project "0..*" -- "0..*" Engineer : participants
+Engineer "1" -- "0..*" Specialization : specialties
+@enduml
